@@ -1,8 +1,8 @@
 
 /* swiper card */
 .banner-card .swiper {
-    width: 240px;
-    height: 320px;
+    width: 290px;
+    height: 370px;
 }
   
   .banner-card .swiper-slide {
@@ -18,24 +18,30 @@
     background-size: cover;
   }
   
+
+
   .banner-card .swiper-slide:nth-child(1n) {
-    background-image: url('/banner-books/book1.png');
+    background-image: url('/banner-books/Book1.jpg');
   }
   
   .banner-card .swiper-slide:nth-child(2n) {
-    background-image: url('/banner-books/book2.png');
+    background-image: url('/banner-books/Book2.jpg');
   }
   
   .banner-card .swiper-slide:nth-child(3n) {
-    background-image: url('/banner-books/book3.png');
+    background-image: url('/banner-books/Book3.jpg');
   }
   
   .banner-card .swiper-slide:nth-child(4n) {
-    background-image: url('/banner-books/book4.png');
+    background-image: url('/banner-books/Book4.jpg');
   }
   
   .banner-card .swiper-slide:nth-child(5n) {
-    background-image: url('/banner-books/book5.png');
+    background-image: url('/banner-books/Book5.jpg');
+  }
+
+  .banner-card .swiper-slide:nth-child(6n) {
+    background-image: url('/banner-books/Book6.jpg');
   }
 
   
