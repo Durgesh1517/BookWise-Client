@@ -7,7 +7,7 @@ export default function Shop() {
   const [books, setBooks] = useState([]);
 // fetching data
   useEffect(() =>{
-    fetch('http://localhost:5000/all-books')
+    fetch('https://book-wise-server.vercel.app/all-books')
     .then(res => res.json())
     .then(data => setBooks(data))
   }, [loading]);
@@ -25,7 +25,7 @@ export default function Shop() {
       <h2 className='text-3xl font-bold text-center mb-16 z-40'>All Books are Available Here</h2>
         <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8'>
           {
-            books.map(book => <Card>
+            books.map(book => <Card key={book.id}>
               <img src={book.imageURL} alt="" className='h-96' />
               <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 <p>
