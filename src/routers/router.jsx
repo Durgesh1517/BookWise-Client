@@ -12,8 +12,8 @@ import ManageBooks from "../Dashboard/ManageBooks";
 import EditBooks from "../Dashboard/EditBooks";
 import Signup from "../pages/Signup";
 import Logout from "../pages/Logout";
-import Cart from "../pages/cart/cart";  // Import Cart (Ensure the path is correct)
-import Checkout from "../pages/checkout/Checkout";  // Import Checkout (Ensure the path is correct)
+// import Cart from "../pages/cart/cart";  
+import Checkout from "../pages/checkout/Checkout";  
 import ErrorPage from "../pages/shared/ErrorPage";
 import About from "../pages/about/About";
 import Blog from "../pages/blog/Blog";
