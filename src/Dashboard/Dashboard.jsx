@@ -7,10 +7,10 @@ const Dashboard = () => {
     <div className="px-4">
       <div className="w-full mx-auto">
         <div className="bg-white rounded-3xl p-8 mb-5">
-          <h1 className="text-3xl font-bold mb-10">Demo Dashboard development for the book inventory</h1>
+          <h1 className="text-3xl font-bold mb-10"> Dashboard development for the book inventory</h1>
           <div className="flex items-center justify-between">
             <div className="flex items-stretch">
-              <div className="text-gray-400 text-xs">Members <br />connected</div>
+              <div className="text-gray-400 text-xs">Joined <br />Members</div>
               <div className="h-100 border-l mx-4"></div>
               <div className="flex flex-nowrap -space-x-3">
                 <div className="h-9 w-9">
