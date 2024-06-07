@@ -13,6 +13,7 @@ const ReviewCard = () => {
                 <FaStar />
                 <FaStar />
                 <FaStar />
+                
             </div>
 
             {/* texts */}

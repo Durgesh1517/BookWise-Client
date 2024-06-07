@@ -1,96 +1,97 @@
 import { Spinner } from 'flowbite-react';
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
+
 const posts = [
   {
     id: 1,
-    title: 'Boost your conversion rate',
+    title: '10 Must-Read Books for Summer',
     href: '#',
     description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    category: { title: 'Marketing', href: '#' },
+      'Dive into these captivating reads perfect for your summer vacation. From thrillers to romances, we have something for everyone.',
+    date: 'June 1, 2024',
+    datetime: '2024-06-01',
+    category: { title: 'Recommendations', href: '#' },
     author: {
-      name: 'Michael Foster',
-      role: 'Co-Founder / CTO',
+      name: 'Jane Doe',
+      role: 'Literary Critic',
       href: '#',
       imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        'https://images.unsplash.com/photo-1529245019870-59e1b6be0f33?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
     },
   },
   {
     id: 2,
-    title: 'Boost your conversion rate',
+    title: 'The Benefits of Reading Daily',
     href: '#',
     description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    category: { title: 'Marketing', href: '#' },
+      'Discover how making time for reading each day can improve your mental health, increase your knowledge, and enhance your creativity.',
+    date: 'May 20, 2024',
+    datetime: '2024-05-20',
+    category: { title: 'Health', href: '#' },
     author: {
-      name: 'Michael Foster',
-      role: 'Co-Founder / CTO',
+      name: 'John Smith',
+      role: 'Health Blogger',
       href: '#',
       imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-  },
-  {
-    id: 4,
-    title: 'Boost your conversion rate',
-    href: '#',
-    description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    category: { title: 'Marketing', href: '#' },
-    author: {
-      name: 'Michael Foster',
-      role: 'Co-Founder / CTO',
-      href: '#',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
     },
   },
   {
     id: 3,
-    title: 'Boost your conversion rate',
+    title: 'How to Start a Book Club',
     href: '#',
     description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    category: { title: 'Marketing', href: '#' },
+      'Looking to share your love of reading with others? Learn how to start and manage a successful book club in your community.',
+    date: 'May 10, 2024',
+    datetime: '2024-05-10',
+    category: { title: 'Community', href: '#' },
     author: {
-      name: 'Michael Foster',
-      role: 'Co-Founder / CTO',
+      name: 'Emily Johnson',
+      role: 'Community Organizer',
       href: '#',
       imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        'https://images.unsplash.com/photo-1540574163026-643ea20ade25?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
     },
   },
-  // More posts...
-]
+  {
+    id: 4,
+    title: 'Top 5 Mystery Novels of 2024',
+    href: '#',
+    description:
+      'Unravel the best mystery novels of the year that will keep you on the edge of your seat with suspense and excitement.',
+    date: 'April 15, 2024',
+    datetime: '2024-04-15',
+    category: { title: 'Genres', href: '#' },
+    author: {
+      name: 'Alex Brown',
+      role: 'Book Reviewer',
+      href: '#',
+      imageUrl:
+        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
+    },
+  },
+];
 
 const Blog = () => {
-  const {loading } = useContext(AuthContext);
+  const { loading } = useContext(AuthContext);
 
-  if(loading) {
-    return <div className='text-center mt-28'>
-      <Spinner aria-label="Center-aligned spinner example" />
-    </div>
+  if (loading) {
+    return (
+      <div className='text-center mt-28'>
+        <Spinner aria-label="Center-aligned spinner example" />
+      </div>
+    );
   }
-
 
   return (
     <div>
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the blog</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">From the Blog</h2>
             <p className="mt-2 text-lg leading-8 text-gray-600">
-              Learn how to grow your business with our expert advice.
+              Explore our latest posts on books, reading habits, and literary communities.
             </p>
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -134,7 +135,7 @@ const Blog = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Blog
+export default Blog;

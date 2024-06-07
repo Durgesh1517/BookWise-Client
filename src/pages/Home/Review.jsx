@@ -52,6 +52,7 @@ const Review = () => {
                             <FaStar />
                             <FaStar />
                             <FaStar />
+                            
                         </div>
 
                         {/* texts */}
