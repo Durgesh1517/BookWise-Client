@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         path: "/book/:id",
         element: <SignleBook />,
         loader: ({ params }) =>
-          fetch(`https://book-wise-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000/book/${params.id}`),
       },
       {
         path: "/about",
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
         path: "/admin/dashboard/edit-books/:id",
         element: <EditBooks />,
         loader: ({ params }) =>
-          fetch(`https://book-wise-server.vercel.app/book/${params.id}`),
+          fetch(`http://localhost:5000//book/${params.id}`),
       },
     ],
   },

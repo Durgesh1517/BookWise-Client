@@ -7,7 +7,7 @@ export default function Shop() {
   const [books, setBooks] = useState([]);
 // fetching data
   useEffect(() =>{
-    fetch('https://book-wise-server.vercel.app/all-books')
+    fetch('http://localhost:5000/all-books')
     .then(res => res.json())
     .then(data => setBooks(data))
   }, [loading]);
