@@ -17,7 +17,7 @@ const posts = [
       role: 'Literary Critic',
       href: '#',
       imageUrl:
-        'https://images.unsplash.com/photo-1529245019870-59e1b6be0f33?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
+        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=facearea&w=256&h=256&q=80',
     },
   },
   {

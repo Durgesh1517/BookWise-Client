@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,10 +10,54 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 // react icons
-import { FaStar } from 'react-icons/fa6'
+import { FaStar } from 'react-icons/fa6';
 import { Avatar } from 'flowbite-react';
-import profile from "../../assets/profile.jpg"
-import ReviewCard from '../shared/ReviewCard';
+import profile from "../../assets/profile.jpg";
+
+const reviews = [
+    {
+        stars: 5,
+        text: "This company provided exceptional service! Their attention to detail and customer care was outstanding. Highly recommend!.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.",
+        name: "Mark Ping",
+        position: "CEO, ABC Company",
+        image: profile
+    },
+    {
+        stars: 5,
+        text: "Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.",
+        name: "Sarah Johnson",
+        position: "Marketing Director, XYZ Ltd.",
+        image: profile
+    },
+    {
+        stars: 5,
+        text: "Great quality and fantastic customer support. I will definitely be coming back for more!.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.Very happy with the service.",
+        name: "David Lee",
+        position: "Product Manager, DEF Inc.",
+        image: profile
+    },
+    {
+        stars: 5,
+        text: "I was thoroughly impressed with the level of service and quality. Everything was delivered on time and exceeded expectations.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.",
+        name: "Emily Davis",
+        position: "Operations Manager, GHI Co.",
+        image: profile
+    },
+    {
+        stars: 5,
+        text: "This company provided exceptional service! Their attention to detail and customer care was outstanding. Highly recommend!.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.",
+        name: "Mark Ping",
+        position: "CEO, ABC Company",
+        image: profile
+    },
+    {
+        stars: 5,
+        text: "This company provided exceptional service! Their attention to detail and customer care was outstanding. Highly recommend!.Amazing experience! The team was professional, responsive, and went above and beyond to meet our needs.",
+        name: "Mark Ping",
+        position: "CEO, ABC Company",
+        image: profile
+    },
+];
 
 const Review = () => {
     return (
@@ -44,48 +88,35 @@ const Review = () => {
                 }}
                 className="mySwiper"
             >
-                <SwiperSlide className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
-                    <div className='space-y-6'>
-                        <div className='text-amber-500 flex gap-2'>
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                            <FaStar />
-                            
-                        </div>
+                {reviews.map((review, index) => (
+                    <SwiperSlide key={index} className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
+                        <div className='space-y-6'>
+                            <div className='text-amber-500 flex gap-2'>
+                                {[...Array(review.stars)].map((_, i) => (
+                                    <FaStar key={i} />
+                                ))}
+                            </div>
 
-                        {/* texts */}
-                        <div className='mt-7'>
-                            <p className='mb-5'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel voluptatibus libero eaque illo voluptate ducimus commodi, eos, quam repellendus, officiis esse cum alias nemo blanditiis dolore quas officia molestiae accusantium!</p>
-                            <Avatar
-                                alt="avatar of Jese"
-                                img={profile}
-                                rounded
-                                className='w-10 mb-4'
-                            />
-                            <h5 className='text-lg font-medium'>Mark Ping</h5>
-                            <p className='text-sm'> CEO, ABC Company</p>
+                            {/* texts */}
+                            <div className='mt-7'>
+                                <p className='mb-5'>{review.text}</p>
+                                <Avatar
+                                    alt={`avatar of ${review.name}`}
+                                    img={review.image}
+                                    rounded
+                                    className='w-10 mb-4'
+                                />
+                                <h5 className='text-lg font-medium'>{review.name}</h5>
+                                <p className='text-sm'>{review.position}</p>
+                            </div>
                         </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
-                    <ReviewCard />
-                </SwiperSlide>
-                <SwiperSlide className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
-                    <ReviewCard />
-                </SwiperSlide>
-                <SwiperSlide className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
-                    <ReviewCard />
-                </SwiperSlide>
-                <SwiperSlide className='shadow-2xl bg-white py-8 px-4 md:m-5 rounded-lg border'>
-                    <ReviewCard />
-                </SwiperSlide>
+                    </SwiperSlide>
+                ))}
             </Swiper>
 
             <div className='h-20'></div>
         </div>
-    )
+    );
 }
 
-export default Review
+export default Review;
