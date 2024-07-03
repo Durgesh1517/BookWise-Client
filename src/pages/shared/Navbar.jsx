@@ -29,11 +29,13 @@ const Navbar = () => {
 
   const navItems = [
     { link: "Home", path: "/" },
-    { link: "About", path: "/about" },
+    
     { link: "Shop", path: "/shop" },
     { link: "Admin", path: "/admin/dashboard" },
+    
+    { link: "Cart", path: "/cart" },
     { link: "Blog", path: "/blog" },
-    // { link: "Cart", path: "/cart" },
+    { link: "About", path: "/about" },
     // { link: "Checkout", path: "/checkout" },
   ];
 
