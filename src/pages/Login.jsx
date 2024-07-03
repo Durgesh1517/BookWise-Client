@@ -55,7 +55,7 @@ export default function Login() {
                 <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                     <div className="max-w-md mx-auto">
                         <div>
-                            <h1 className="text-3xl font-semibold">Please Login to Dashborad</h1>
+                            <h1 className="text-3xl font-semibold"> Login  Admin Dashborad </h1>
                         </div>
                         <div className="divide-y divide-gray-200">
                             <form onSubmit={handleLogin} className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
@@ -67,7 +67,7 @@ export default function Login() {
                                 </div>
                                 <div>
                                     <p>{ErrorMessage ? <span className='text-blue-500 text-sm'>Email or Username is not valid!</span> : ''}</p>
-                                    <p className='text-base mt-1'>If you haven't an account. Please create here <Link to='/create-user' className='underline text-blue-600'>Sign Up</Link></p>
+                                    {/* <p className='text-base mt-1'>If you haven't an account. Please create here <Link to='/create-user' className='underline text-blue-600'>Sign Up</Link></p> */}
 
                                 </div>
                                 <div className="relative">
@@ -80,10 +80,10 @@ export default function Login() {
                     {/* social login */}
                     <div>
                         <hr />
-                        <div className="flex w-full items-center flex-col mt-5 gap-3">
+                        {/* <div className="flex w-full items-center flex-col mt-5 gap-3">
                             <button onClick={handleRegister} className='block'> <img src={googleLogo} alt="" className='w-12 h-12 inline-block' />Log in with Google</button>
                             <button> <img src={fbLogo} alt="" className='w-10 h-10 inline-block mr-1' />Log in with Facebook</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

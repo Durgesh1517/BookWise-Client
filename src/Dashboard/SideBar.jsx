@@ -52,22 +52,8 @@ const SideBar = () => {
               href="#"
               icon={HiUser}
             >
-              <p>
-                Users
-              </p>
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="#"
-              icon={HiShoppingBag}
-            >
-              <p>
-                Products
-              </p>
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="/login"
-              icon={HiArrowSmRight}
-            >
+              
+              
               <p>
                 Sign In
               </p>
