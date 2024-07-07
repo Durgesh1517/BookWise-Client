@@ -5,6 +5,7 @@ import app from '../firebase/firebase.config';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();

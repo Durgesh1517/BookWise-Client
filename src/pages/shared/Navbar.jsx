@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBarsStaggered, FaBlog, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { AuthContext } from '../../contexts/AuthProvider';
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -29,14 +31,11 @@ const Navbar = () => {
 
   const navItems = [
     { link: "Home", path: "/" },
-    
     { link: "Shop", path: "/shop" },
-    // { link: "Admin", path: "/admin/dashboard" },
-    
     { link: "Cart", path: "/cart" },
     { link: "Blog", path: "/blog" },
     { link: "About", path: "/about" },
-    // { link: "Checkout", path: "/checkout" },
+    user ? { link: "Logout", path: "/logout" } : { link: "Login", path: "/login" },
   ];
 
   return (
@@ -61,7 +60,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* menu btn, visible on mobile screen */}
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
