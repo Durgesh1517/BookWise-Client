@@ -61,9 +61,7 @@ const BookCards = ({headline, books}) => {
                                         <h3 className='text-black font-semibold'>{book.bookTitle}</h3>
                                         <p>{book.authorName}</p>
                                     </div>
-                                    <div>
-                                        <p className='font-bold text-blue-700'>$10.00</p>
-                                    </div>
+                                    
                                 </div>
                             </Link>
                         </SwiperSlide>)
