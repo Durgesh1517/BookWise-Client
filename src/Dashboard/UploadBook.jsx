@@ -1,37 +1,18 @@
-import React, { useState } from 'react'
-
-import { Button, Checkbox, Label, Select, TextInput, Textarea } from 'flowbite-react';
+import React, { useState } from 'react';
+import { Button, Label, Select, TextInput, Textarea } from 'flowbite-react';
 
 const UploadBook = () => {
   const bookCategories = [
-    "Fiction",
-    "Non-fiction",
-    "Mystery",
-    "Programming",
-    "Science fiction",
-    "Fantasy",
-    "Horror",
-    "Biography",
-    "Autobiography",
-    "History",
-    "Self-help",
-    "Business",
-    "Memoir",
-    "Poetry",
-    "Children's books",
-    "Travel",
-    "Religion and spirituality",
-    "Science",
-    "Art and design",
+    "Fiction", "Non-fiction", "Mystery", "Programming", "Science fiction",
+    "Fantasy", "Horror", "Biography", "Autobiography", "History", "Self-help",
+    "Business", "Memoir", "Poetry", "Children's books", "Travel", 
+    "Religion and spirituality", "Science", "Art and design",
   ];
 
-
-  const [selectedBookCategory, setSelectedBookCategory] = useState(
-    bookCategories[0]
-  );
+  const [selectedBookCategory, setSelectedBookCategory] = useState(bookCategories[0]);
+  const [price, setPrice] = useState('');
 
   const handleChangeSelectedValue = (event) => {
-    console.log(event.target.value);
     setSelectedBookCategory(event.target.value);
   };
 
@@ -53,42 +34,37 @@ const UploadBook = () => {
       category,
       bookDescription,
       bookPDFURL,
+      price,
     };
-    // console.log(dataObj)
+
     fetch("http://localhost:5000/upload-book", {
       method: "POST",
-
       headers: {
         "Content-type": "application/json",
       },
-
       body: JSON.stringify(bookObj),
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-        alert("Book updated successfully!!!!");
+        alert("Book uploaded successfully!");
         form.reset();
+        setPrice('');
+      })
+      .catch((error) => {
+        console.error("Error uploading book:", error);
       });
   };
-
 
   return (
     <div className='px-4 my-12'>
       <h2 className='mb-8 text-3xl font-bold'>Upload A Book!</h2>
       <form className="flex lg:w-[1180px] flex-col flex-wrap gap-4" onSubmit={handleSubmit}>
 
-        {/* first row */}
+        {/* First row */}
         <div className='flex gap-8'>
-
-          {/* book name */}
+          {/* Book name */}
           <div className='lg:w-1/2'>
-            <div className="mb-2 block">
-              <Label
-                htmlFor="bookTitle"
-                value="Book Title"
-              />
-            </div>
+            <Label htmlFor="bookTitle" value="Book Title" />
             <TextInput
               id="bookTitle"
               placeholder="Book Name"
@@ -99,14 +75,9 @@ const UploadBook = () => {
             />
           </div>
 
-          {/* author name */}
+          {/* Author name */}
           <div className='lg:w-1/2'>
-            <div className="mb-2 block">
-              <Label
-                htmlFor="authorName"
-                value="Author Name"
-              />
-            </div>
+            <Label htmlFor="authorName" value="Author Name" />
             <TextInput
               id="authorName"
               placeholder="Author Name"
@@ -116,19 +87,13 @@ const UploadBook = () => {
               className='w-full'
             />
           </div>
-
         </div>
 
-        {/* 2nd Row */}
+        {/* Second row */}
         <div className='flex gap-8'>
-          {/* book url */}
+          {/* Book image URL */}
           <div className='lg:w-1/2'>
-            <div className="mb-2 block">
-              <Label
-                htmlFor="imageURL"
-                value="Book Image URL"
-              />
-            </div>
+            <Label htmlFor="imageURL" value="Book Image URL" />
             <TextInput
               id="imageURL"
               placeholder="Image URL"
@@ -139,14 +104,9 @@ const UploadBook = () => {
             />
           </div>
 
-          {/* book category */}
+          {/* Book category */}
           <div className='lg:w-1/2'>
-            <div className="mb-2 block">
-              <Label
-                htmlFor="inputState"
-                value="Book Category"
-              />
-            </div>
+            <Label htmlFor="inputState" value="Book Category" />
             <Select
               id="inputState"
               name="categoryName"
@@ -161,17 +121,11 @@ const UploadBook = () => {
               ))}
             </Select>
           </div>
-
         </div>
 
-        {/* full width div for book description */}
+        {/* Book description */}
         <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="bookDescription"
-              value="Book Description"
-            />
-          </div>
+          <Label htmlFor="bookDescription" value="Book Description" />
           <Textarea
             id="bookDescription"
             placeholder="Book Description"
@@ -183,15 +137,9 @@ const UploadBook = () => {
           />
         </div>
 
-
-        {/* book pdf url */}
+        {/* Book PDF URL */}
         <div>
-          <div className="mb-2 block">
-            <Label
-              htmlFor="bookPDFURL"
-              value="Book PDF Link"
-            />
-          </div>
+          <Label htmlFor="bookPDFURL" value="Book PDF Link" />
           <TextInput
             id="bookPDFURL"
             placeholder="Paste Book PDF URL here"
@@ -202,15 +150,28 @@ const UploadBook = () => {
           />
         </div>
 
+        {/* Price */}
+        <div>
+          <Label htmlFor="price" value="Price" />
+          <TextInput
+            id="price"
+            placeholder="Book Price"
+            required
+            type="text"
+            name='price'
+            className='w-full'
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
 
-        {/* Submit btn */}
+        {/* Submit button */}
         <Button type="submit" className='mt-5'>
-          Upload book
+          Upload Book
         </Button>
-
       </form>
     </div>
-  )
+  );
 }
 
-export default UploadBook
+export default UploadBook;

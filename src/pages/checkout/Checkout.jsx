@@ -1,14 +1,17 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../shared/Navbar";
 import FooterMain from "../shared/FooterMain";
 import "./checkout.css";
 
 const Checkout = () => {
+  const location = useLocation();
+  const { book } = location.state || {};
+
   return (
     <>
       <Navbar />
       <div className="checkout-container">
-        
         <h1>Checkout</h1>
         <form className="checkout-form">
           <section className="billing-info">
@@ -66,8 +69,21 @@ const Checkout = () => {
           </section>
           <button type="submit" className="checkout-btn">Place Order</button>
         </form>
+        
+        {/* Order Overview Section */}
+        {book && (
+          <section className="order-overview">
+            <h2><b>Order Overview</b></h2>
+            <div>
+              <h3>{book.bookTitle}</h3>
+             
+              <p>Price: {book.price}</p>
+            </div>
+          </section>
+        )}
+
       </div>
-      
+     
     </>
   );
 };

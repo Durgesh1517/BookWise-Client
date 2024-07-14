@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Card, Spinner } from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 export default function Shop() {
@@ -7,7 +8,8 @@ export default function Shop() {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
-  const [sortBy, setSortBy] = useState(''); // State to track sorting option
+  const [sortBy, setSortBy] = useState('');
+  const navigate = useNavigate();
 
   // Fetching data
   useEffect(() => {
@@ -59,6 +61,11 @@ export default function Shop() {
     setSortBy(e.target.value);
   };
 
+  const handleBuyNow = (book) => {
+    // Navigate to checkout page with selected book information
+    navigate('/checkout', { state: { book } });
+  };
+
   return (
     <div className='my-28 px-4 lg:px-24'>
       <div className='flex justify-between items-center mb-8'>
@@ -105,7 +112,7 @@ export default function Shop() {
                 Price: {book.price}
               </p>
               <div className="flex justify-between mt-4">
-                <button className='px-12 py-2 bg-blue-600 text-white rounded mr-2'>Buy Now</button>
+                <button className='px-12 py-2 bg-blue-600 text-white rounded mr-2' onClick={() => handleBuyNow(book)}>Buy Now</button>
                 <button onClick={() => handleAddToCart(book._id)} className='px-12 py-2 bg-green-600 text-white rounded'>Add to Cart</button>
               </div>
             </Card>
