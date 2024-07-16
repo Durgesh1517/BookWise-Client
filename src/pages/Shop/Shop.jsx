@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Card, Spinner } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { CartContext } from '../../contexts/CartContext'; // Import the CartContext
 
 export default function Shop() {
   const { loading } = useContext(AuthContext);
+  const { addToCart } = useContext(CartContext); // Use the CartContext
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -52,9 +54,10 @@ export default function Shop() {
     );
   }
 
-  const handleAddToCart = (bookId) => {
-    // Implement your add to cart logic here
-    console.log(`Added book with ID ${bookId} to cart`);
+  const handleAddToCart = (book) => {
+    const parsedPrice = parseFloat(book.price); // Ensure price is a number
+    addToCart({ ...book, price: isNaN(parsedPrice) ? 0 : parsedPrice });
+    // navigate('/cart');
   };
 
   const handleSortChange = (e) => {
@@ -62,7 +65,6 @@ export default function Shop() {
   };
 
   const handleBuyNow = (book) => {
-    // Navigate to checkout page with selected book information
     navigate('/checkout', { state: { book } });
   };
 
@@ -81,7 +83,6 @@ export default function Shop() {
           <svg className='absolute right-2 top-3 w-5 h-5 text-gray-400' fill='currentColor' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fillRule='evenodd' d='M12.9 14.32a8 8 0 111.42-1.42l4.24 4.24a1 1 0 01-1.42 1.42l-4.24-4.24zm-1.4-6.92a6 6 0 100 12 6 6 0 000-12z' clipRule='evenodd' /></svg>
         </div>
       </div>
-      {/* Sorting dropdown */}
       <div className="mb-4">
         <label htmlFor="sort" className="mr-2 font-medium">Sort by:</label>
         <select
@@ -96,7 +97,6 @@ export default function Shop() {
         </select>
       </div>
 
-      {/* Book grid */}
       <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8'>
         {
           filteredBooks.map(book => (
@@ -113,7 +113,7 @@ export default function Shop() {
               </p>
               <div className="flex justify-between mt-4">
                 <button className='px-12 py-2 bg-blue-600 text-white rounded mr-2' onClick={() => handleBuyNow(book)}>Buy Now</button>
-                <button onClick={() => handleAddToCart(book._id)} className='px-12 py-2 bg-green-600 text-white rounded'>Add to Cart</button>
+                <button onClick={() => handleAddToCart(book)} className='px-12 py-2 bg-green-600 text-white rounded'>Add to Cart</button>
               </div>
             </Card>
           ))

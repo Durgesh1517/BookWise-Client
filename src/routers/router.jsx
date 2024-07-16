@@ -12,11 +12,12 @@ import ManageBooks from "../Dashboard/ManageBooks";
 import EditBooks from "../Dashboard/EditBooks";
 import Signup from "../pages/Signup";
 import Logout from "../pages/Logout";
-// import Cart from "../pages/cart/cart";  
+import Cart from "../pages/cart/CartPage";  
 import Checkout from "../pages/checkout/Checkout";  
 import ErrorPage from "../pages/shared/ErrorPage";
 import About from "../pages/about/About";
 import Blog from "../pages/blog/Blog";
+import CartPage from "../pages/cart/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <cart />,  // Add Cart route
+        element: <CartPage />,  // Add Cart route
       },
       {
         path: "/checkout",
