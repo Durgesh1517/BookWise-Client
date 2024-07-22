@@ -35,9 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/book/:id",
-        element: <SignleBook />,
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/book/${params.id}`),
+        element: <Shop />,
       },
       {
         path: "/about",

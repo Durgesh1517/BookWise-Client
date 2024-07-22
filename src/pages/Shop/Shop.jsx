@@ -11,6 +11,8 @@ export default function Shop() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [sortBy, setSortBy] = useState('');
+  const [showPopup, setShowPopup] = useState(false); // State for popup message
+  const [popupMessage, setPopupMessage] = useState(''); // State for popup message text
   const navigate = useNavigate();
 
   // Fetching data
@@ -34,30 +36,14 @@ export default function Shop() {
     }
   }, [searchTerm, books]);
 
-  // Sorting function based on selected option
-  useEffect(() => {
-    if (sortBy === 'lowToHigh') {
-      const sorted = [...filteredBooks].sort((a, b) => a.price - b.price);
-      setFilteredBooks(sorted);
-    } else if (sortBy === 'highToLow') {
-      const sorted = [...filteredBooks].sort((a, b) => b.price - a.price);
-      setFilteredBooks(sorted);
-    }
-  }, [sortBy, filteredBooks]);
-
-  // Loader
-  if (loading) {
-    return (
-      <div className="text-center mt-28">
-        <Spinner aria-label="Center-aligned spinner example" />
-      </div>
-    );
-  }
-
   const handleAddToCart = (book) => {
     const parsedPrice = parseFloat(book.price); // Ensure price is a number
     addToCart({ ...book, price: isNaN(parsedPrice) ? 0 : parsedPrice });
-    // navigate('/cart');
+    setPopupMessage(`${book.bookTitle} has been added to your cart.`);
+    setShowPopup(true);
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000); // Hide the popup after 3 seconds
   };
 
   const handleSortChange = (e) => {
@@ -67,6 +53,15 @@ export default function Shop() {
   const handleBuyNow = (book) => {
     navigate('/checkout', { state: { book } });
   };
+
+  // Loader
+  if (loading) {
+    return (
+      <div className="text-center mt-28">
+        <Spinner aria-label="Center-aligned spinner example" />
+      </div>
+    );
+  }
 
   return (
     <div className='my-28 px-4 lg:px-24'>
@@ -82,19 +77,6 @@ export default function Shop() {
           />
           <svg className='absolute right-2 top-3 w-5 h-5 text-gray-400' fill='currentColor' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fillRule='evenodd' d='M12.9 14.32a8 8 0 111.42-1.42l4.24 4.24a1 1 0 01-1.42 1.42l-4.24-4.24zm-1.4-6.92a6 6 0 100 12 6 6 0 000-12z' clipRule='evenodd' /></svg>
         </div>
-      </div>
-      <div className="mb-4">
-        <label htmlFor="sort" className="mr-2 font-medium">Sort by:</label>
-        <select
-          id="sort"
-          value={sortBy}
-          onChange={handleSortChange}
-          className="py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-        >
-          <option value="">Select</option>
-          <option value="lowToHigh">Price: Low to High</option>
-          <option value="highToLow">Price: High to Low</option>
-        </select>
       </div>
 
       <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8'>
@@ -119,6 +101,12 @@ export default function Shop() {
           ))
         }
       </div>
+
+      {showPopup && (
+        <div className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg">
+          {popupMessage}
+        </div>
+      )}
     </div>
   );
 }

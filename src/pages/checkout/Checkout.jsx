@@ -8,12 +8,17 @@ const Checkout = () => {
   const location = useLocation();
   const { book } = location.state || {};
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert("Your order has been placed successfully!");
+  };
+
   return (
     <>
       <Navbar />
       <div className="checkout-container">
         <h1>Checkout</h1>
-        <form className="checkout-form">
+        <form className="checkout-form" onSubmit={handleSubmit}>
           <section className="billing-info">
             <h2>Billing Information</h2>
             <div className="form-group">
@@ -69,21 +74,18 @@ const Checkout = () => {
           </section>
           <button type="submit" className="checkout-btn">Place Order</button>
         </form>
-        
+
         {/* Order Overview Section */}
         {book && (
           <section className="order-overview">
             <h2><b>Order Overview</b></h2>
             <div>
               <h3>{book.bookTitle}</h3>
-             
               <p>Price: {book.price}</p>
             </div>
           </section>
         )}
-
       </div>
-     
     </>
   );
 };

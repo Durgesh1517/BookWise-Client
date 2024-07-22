@@ -1,11 +1,17 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 
 export default function CartPage() {
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const totalPrice = cartItems.reduce((total, item) => total + (parseFloat(item.price) || 0), 0);
-  
+
+  const handleCheckout = () => {
+    // Here you can add any logic you need before redirecting to the checkout page
+    navigate('/checkout'); // Redirect to the checkout page
+  };
 
   return (
     <div className="my-28 px-4 lg:px-24">
@@ -30,8 +36,7 @@ export default function CartPage() {
             <p>${totalPrice.toFixed(2)}</p>
           </div>
           <button onClick={clearCart} className="px-4 py-2 bg-red-600 text-white rounded mr-2">Clear Cart</button>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded">Checkout</button>
-           
+          <button onClick={handleCheckout} className="px-4 py-2 bg-blue-600 text-white rounded">Checkout</button>
         </>
       )}
     </div>
