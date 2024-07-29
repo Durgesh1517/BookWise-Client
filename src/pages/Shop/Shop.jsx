@@ -2,17 +2,19 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Card, Spinner } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
-import { CartContext } from '../../contexts/CartContext'; // Import the CartContext
+import { CartContext } from '../../contexts/CartContext';
 
 export default function Shop() {
   const { loading } = useContext(AuthContext);
-  const { addToCart } = useContext(CartContext); // Use the CartContext
+  const { addToCart } = useContext(CartContext);
   const [books, setBooks] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('');
-  const [showPopup, setShowPopup] = useState(false); // State for popup message
-  const [popupMessage, setPopupMessage] = useState(''); // State for popup message text
+  const [categoryFilter, setCategoryFilter] = useState('All'); // New state for category filter
+  const [priceRange, setPriceRange] = useState([0, 100]); // New state for price range filter
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
   const navigate = useNavigate();
 
   // Fetching data
@@ -25,25 +27,32 @@ export default function Shop() {
       });
   }, [loading]);
 
+  // Filtering books
   useEffect(() => {
-    if (searchTerm.trim() === '') {
-      setFilteredBooks(books);
-    } else {
-      const filtered = books.filter(book =>
-        book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredBooks(filtered);
+    let filtered = books.filter(book =>
+      book.bookTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (categoryFilter !== 'All') {
+      filtered = filtered.filter(book => book.category === categoryFilter);
     }
-  }, [searchTerm, books]);
+
+    filtered = filtered.filter(book => {
+      const price = parseFloat(book.price.replace('$', ''));
+      return price >= priceRange[0] && price <= priceRange[1];
+    });
+
+    setFilteredBooks(filtered);
+  }, [searchTerm, categoryFilter, priceRange, books]);
 
   const handleAddToCart = (book) => {
-    const parsedPrice = parseFloat(book.price); // Ensure price is a number
+    const parsedPrice = parseFloat(book.price.replace('$', ''));
     addToCart({ ...book, price: isNaN(parsedPrice) ? 0 : parsedPrice });
     setPopupMessage(`${book.bookTitle} has been added to your cart.`);
     setShowPopup(true);
     setTimeout(() => {
       setShowPopup(false);
-    }, 3000); // Hide the popup after 3 seconds
+    }, 3000);
   };
 
   const handleSortChange = (e) => {
@@ -54,7 +63,6 @@ export default function Shop() {
     navigate('/checkout', { state: { book } });
   };
 
-  // Loader
   if (loading) {
     return (
       <div className="text-center mt-28">
@@ -65,9 +73,9 @@ export default function Shop() {
 
   return (
     <div className='my-28 px-4 lg:px-24'>
-      <div className='flex justify-between items-center mb-8'>
-        <h2 className='text-3xl font-bold'>All Books are Available Here</h2>
-        <div className='relative'>
+      <div className='flex flex-col md:flex-row justify-between items-start mb-8'>
+        <h2 className='text-3xl font-bold mb-4'>All Books are Available Here</h2>
+        <div className='flex flex-col md:flex-row gap-4 mb-4'>
           <input
             type="text"
             placeholder='Search for a book'
@@ -75,7 +83,33 @@ export default function Shop() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className='py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600'
           />
-          <svg className='absolute right-2 top-3 w-5 h-5 text-gray-400' fill='currentColor' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fillRule='evenodd' d='M12.9 14.32a8 8 0 111.42-1.42l4.24 4.24a1 1 0 01-1.42 1.42l-4.24-4.24zm-1.4-6.92a6 6 0 100 12 6 6 0 000-12z' clipRule='evenodd' /></svg>
+          <select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)}
+            className='py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600'
+          >
+            <option value="All">All Categories</option>
+            {/* Add your categories here */}
+            <option value="Fiction">Fiction</option>
+            <option value="Fantasy">Fantasy</option>
+            {/* Add more options as needed */}
+          </select>
+          <input
+            type="number"
+            placeholder='Min Price'
+            min="0"
+            value={priceRange[0]}
+            onChange={(e) => setPriceRange([parseFloat(e.target.value), priceRange[1]])}
+            className='py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600'
+          />
+          <input
+            type="number"
+            placeholder='Max Price'
+            min="0"
+            value={priceRange[1]}
+            onChange={(e) => setPriceRange([priceRange[0], parseFloat(e.target.value)])}
+            className='py-2 px-4 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600'
+          />
         </div>
       </div>
 

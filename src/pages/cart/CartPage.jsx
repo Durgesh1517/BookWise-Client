@@ -2,14 +2,35 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 
+// Helper function to parse price
+const parsePrice = (price) => {
+  if (typeof price === 'number') {
+    return price;
+  }
+  
+  if (typeof price === 'string') {
+    // Remove the dollar sign and parse as float
+    const cleanedPrice = price.replace('$', '').trim();
+    const parsedPrice = parseFloat(cleanedPrice);
+    if (isNaN(parsedPrice)) {
+      console.error('Failed to parse price:', price);
+      return 0;
+    }
+    return parsedPrice;
+  }
+
+  console.error('Unexpected price format:', price);
+  return 0;
+};
+
 export default function CartPage() {
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
-  const totalPrice = cartItems.reduce((total, item) => total + (parseFloat(item.price) || 0), 0);
+  // Calculate total price
+  const totalPrice = cartItems.reduce((total, item) => total + parsePrice(item.price), 0);
 
   const handleCheckout = () => {
-    // Here you can add any logic you need before redirecting to the checkout page
     navigate('/checkout'); // Redirect to the checkout page
   };
 
@@ -25,7 +46,7 @@ export default function CartPage() {
               <div key={item._id} className="flex justify-between items-center mb-4">
                 <div>
                   <h5 className="text-2xl font-bold">{item.bookTitle}</h5>
-                  <p>${(parseFloat(item.price) || 0).toFixed(2)}</p> {/* Ensure price is a number */}
+                  <p>${parsePrice(item.price).toFixed(2)}</p> {/* Ensure price is a number */}
                 </div>
                 <button onClick={() => removeFromCart(item._id)} className="px-4 py-2 bg-red-600 text-white rounded">Remove</button>
               </div>

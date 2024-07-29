@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import BannerCard from '../shared/BannerCard'
+import React, { useState } from 'react';
+import BannerCard from '../shared/BannerCard';
 
 export const Banner = () => {
     const [feedback, setFeedback] = useState('');
@@ -18,6 +18,9 @@ export const Banner = () => {
         setTimeout(() => {
             setShowPopup(false);
         }, 3000); // Hide the popup after 3 seconds
+
+        // Clear the feedback input box
+        setFeedback('');
     };
 
     return (
@@ -33,7 +36,7 @@ export const Banner = () => {
                     <h1 className='lg:text-6xl text-5xl font-bold text-black mb-5 lg:leading-tight leading-snug'>
                         Welcome to the BookWise <span className='text-blue-700'>Here you will explore Dreams</span>
                     </h1>
-                    <p>Find the adventuries world with the help of Book and novals.Here you will explore so many intresting books.You are just one step behind to your adventuries life.</p>
+                    <p>Find the adventurous world with the help of books and novels. Here you will explore many interesting books. You are just one step behind to your adventurous life.</p>
                     <div>
                         <input
                             type="text"
